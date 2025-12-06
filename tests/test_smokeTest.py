@@ -2,6 +2,7 @@
 import pytest
 import time
 import json
+from selenium.webdriver.firefox.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
@@ -12,9 +13,11 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class TestSmokeTest():
   def setup_method(self, method):
-    self.driver = webdriver.Firefox()
+    options = Options()
+    options.add_argument("--headless=new")
+    self.driver = webdriver.Firefox(options=options)
     self.vars = {}
-  
+    
   def teardown_method(self, method):
     self.driver.quit()
   
